@@ -1,12 +1,18 @@
 package com.recycleme.recycleme.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 
 @Entity 
@@ -50,6 +56,10 @@ public class Usuario {
 	
 	@NotNull
 	private String numero;
+	
+//	@OneToMany(mappedBy= "usuario", cascade = CascadeType.ALL)
+//	@JsonIgnoreProperties("usuario")
+//	private List<Produtos> produtos;
 
 	public Long getId() {
 		return id;
