@@ -21,15 +21,15 @@ public class Usuario {
 	@Size(min= 5, max= 100)
 	private String nome;
 	
-	@Size(min= 5, max= 100)
+	@Size(min= 5, max= 45)
 	private String cnpj;
 	
 	@NotNull
-	@Size(min= 5, max= 100)
+	@Size(min= 5, max= 45)
 	private String email;
 	
 	@NotNull
-	@Size(min= 5, max= 100)
+	@Size(min= 5, max= 13)
 	private String telefone;
 	
 	@NotNull
@@ -41,15 +41,14 @@ public class Usuario {
 	private String cep;
 	
 	@NotNull
-	@Size(min= 5, max= 100)
+	@Size( max= 45)
 	private String bairro;
 	
 	@NotNull
-	@Size(min= 5, max= 100)
+	@Size(max= 45)
 	private String rua;
 	
 	@NotNull
-	@Size(min= 5, max= 100)
 	private String numero;
 
 	public Long getId() {
