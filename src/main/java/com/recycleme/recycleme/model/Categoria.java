@@ -20,6 +20,7 @@ public class Categoria {
 	/*
 	 * Nome da categoria, exemplo:
 	 * Aço, alumínio, baterias etc
+	 * 
 	 */
 	
 	@NotNull
