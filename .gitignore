@@ -33,4 +33,8 @@ build/
 .vscode/
 
 ### DB ###
+<<<<<<< HEAD
 /recycle.me/src/main/resources
+=======
+/src/main/resources
+>>>>>>> e10d2712459e88ef462f5b2ea4263ecfa2f5c32a
