@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.recycleme.recycleme.model.Produto;
 import com.recycleme.recycleme.repository.ProdutoRepository;
+import com.recycleme.recycleme.util.CompraVenda;
 
 @RestController
 @RequestMapping("api/v1/recycleMe/produto")
@@ -36,9 +37,9 @@ public class ProdutoController {
 					.map(resp -> ResponseEntity.ok(resp))
 					.orElse(ResponseEntity.notFound().build());
 	}
-	@GetMapping("/compravenda/{CompraVenda}")
-	public ResponseEntity<List<Produto>> GetByCompraVenda(@PathVariable Enum<?> CompraVenda){
-		return ResponseEntity.ok(repository.findAllByCompraVenda(CompraVenda));
+	@GetMapping("/compravenda/{compraVenda}")
+	public ResponseEntity<List<Produto>> GetByCompraVenda(@PathVariable CompraVenda compraVenda){
+		return ResponseEntity.ok(repository.findAllByCompraVenda(compraVenda));
 	}
 	
 	@PostMapping

@@ -8,6 +8,6 @@ import com.recycleme.recycleme.model.Avaliacao;
 
 @Repository
 public interface AvaliacaoRepository extends JpaRepository<Avaliacao, Long> {
-	public List<Avaliacao>findAllByAvaliacaoContaining(Long avaliacao);
+	public List<Avaliacao>findAllByAvaliacao(Long avaliacao);
 	
 }
