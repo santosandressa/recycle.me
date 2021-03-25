@@ -37,8 +37,8 @@ public class ProdutoController {
 					.orElse(ResponseEntity.notFound().build());
 	}
 	@GetMapping("/compravenda/{CompraVenda}")
-	public ResponseEntity<List<Produto>> GetByCompraVenda(@PathVariable Enum<?> compravenda){
-		return ResponseEntity.ok(repository.findAllByCompraVendaContaining(compravenda));
+	public ResponseEntity<List<Produto>> GetByCompraVenda(@PathVariable Enum<?> CompraVenda){
+		return ResponseEntity.ok(repository.findAllByCompraVenda(CompraVenda));
 	}
 	
 	@PostMapping

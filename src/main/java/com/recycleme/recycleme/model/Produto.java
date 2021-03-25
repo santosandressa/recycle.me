@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.recycleme.recycleme.util.CompraVenda;
 
 @Entity
-@Table
+@Table(name = "produto")
 public class Produto {
 
 	
@@ -38,7 +38,7 @@ public class Produto {
 	
 	@NotNull
 	@Enumerated(EnumType.STRING)
-	private CompraVenda Produto;
+	private CompraVenda compraVenda;
 	
 	@ManyToOne
 	@JsonIgnoreProperties("categoria")
@@ -94,6 +94,22 @@ public class Produto {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public CompraVenda getCompraVenda() {
+		return compraVenda;
+	}
+
+	public void setCompraVenda(CompraVenda compraVenda) {
+		this.compraVenda = compraVenda;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 }
