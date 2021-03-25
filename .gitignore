@@ -34,3 +34,5 @@ build/
 
 ### DB ###
 /src/main/resources
+
+recycle.me/src/main/resources/application.properties
