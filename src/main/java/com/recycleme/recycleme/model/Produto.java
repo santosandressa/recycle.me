@@ -3,7 +3,6 @@ package com.recycleme.recycleme.model;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,12 +11,14 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.recycleme.recycleme.util.compra_venda;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.recycleme.recycleme.util.CompraVenda;
 
 @Entity
 @Table
 public class Produto {
 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -37,12 +38,14 @@ public class Produto {
 	
 	@NotNull
 	@Enumerated(EnumType.STRING)
-	private compra_venda Produto;
+	private CompraVenda Produto;
 	
 	@ManyToOne
-	private Categoria Categoria;
+	@JsonIgnoreProperties("categoria")
+	private Categoria categoria;
 	
 	@ManyToOne
+	@JsonIgnoreProperties("usuario")
 	private Usuario usuario;
 
 	public long getId() {
@@ -86,10 +89,11 @@ public class Produto {
 	}
 
 	public Categoria getCategoria() {
-		return Categoria;
+		return categoria;
 	}
 
 	public void setCategoria(Categoria categoria) {
-		Categoria = categoria;
+		this.categoria = categoria;
 	}
+	
 }
