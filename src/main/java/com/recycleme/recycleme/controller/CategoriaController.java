@@ -37,9 +37,9 @@ public class CategoriaController {
 				.map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.notFound().build());
 	}
-	@GetMapping("/titulo/{titulo}")
-	public ResponseEntity<List<Categoria>> getByTitulo(@PathVariable Enum<?> CategoriaTipo){
-		return ResponseEntity.ok(repository.findAllByTipo(CategoriaTipo));
+	@GetMapping("/categoriatipo/{categoriaTipo}")
+	public ResponseEntity<List<Categoria>> getByTitulo(@PathVariable CategoriaTipo categoriaTipo){
+		return ResponseEntity.ok(repository.findAllByTipo(categoriaTipo));
 	}
 	@PostMapping
 	public ResponseEntity<Categoria>post(@RequestBody Categoria categoria){
