@@ -1,6 +1,6 @@
 package com.recycleme.recycleme.util;
 
-public enum compra_venda {
+public enum CompraVenda {
 	
 	Venda,Compra
 
