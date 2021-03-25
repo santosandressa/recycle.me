@@ -1,4 +1,4 @@
-package com.recycleme.recycleme.model;
+package com.recycleme.recycleme.util;
 
 public enum compra_venda {
 	

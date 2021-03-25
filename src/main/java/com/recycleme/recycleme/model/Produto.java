@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.recycleme.recycleme.util.compra_venda;
+
 @Entity
 @Table
 public class Produto {
