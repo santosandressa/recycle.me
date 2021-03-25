@@ -7,6 +7,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -15,7 +16,7 @@ import javax.validation.constraints.Size;
 import com.recycleme.recycleme.util.compra_venda;
 
 @Entity
-@Table
+@Table(name = "produto")
 public class Produto {
 
 	@Id
@@ -40,7 +41,7 @@ public class Produto {
 	private compra_venda Produto;
 	
 	@ManyToOne
-	private Categoria Categoria;
+	private Categoria categoria;
 	
 	@ManyToOne
 	private Usuario usuario;
@@ -86,10 +87,10 @@ public class Produto {
 	}
 
 	public Categoria getCategoria() {
-		return Categoria;
+		return categoria;
 	}
 
 	public void setCategoria(Categoria categoria) {
-		Categoria = categoria;
+		this.categoria = categoria;
 	}
 }
