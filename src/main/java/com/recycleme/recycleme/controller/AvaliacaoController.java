@@ -40,7 +40,7 @@ public class AvaliacaoController {
 	
 	@GetMapping("/avaliacao/{avaliacao}")
 	public ResponseEntity<List<Avaliacao>> GetByAvaliacao(@PathVariable Long avaliacao){
-		return ResponseEntity.ok(repository.findAllByAvaliacaoContaining(avaliacao));
+		return ResponseEntity.ok(repository.findAllByAvaliacao(avaliacao));
 	}
 	
 	@PostMapping
