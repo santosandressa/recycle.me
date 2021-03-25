@@ -62,8 +62,13 @@ public class Usuario {
 	private String numero;
 
 	@OneToMany(mappedBy= "usuario", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties({"usuario", "Avaliacao"})
+	@JsonIgnoreProperties("usuario")
 	private List<Produto> produto;
+	
+	@OneToMany(mappedBy= "usuario", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("usuario")
+	private List<Avaliacao> avaliacao;
+	
 
 	public Long getId() {
 		return id;
@@ -160,4 +165,14 @@ public class Usuario {
 	public void setProduto(List<Produto> produto) {
 		this.produto = produto;
 	}
+
+	public List<Avaliacao> getAvaliacao() {
+		return avaliacao;
+	}
+
+	public void setAvaliacao(List<Avaliacao> avaliacao) {
+		this.avaliacao = avaliacao;
+	}
+	
+	
 }
