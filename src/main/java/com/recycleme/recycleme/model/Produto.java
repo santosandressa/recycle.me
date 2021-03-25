@@ -1,6 +1,8 @@
 package com.recycleme.recycleme.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.recycleme.recycleme.util.compra_venda;
 
 @Entity
 @Table
@@ -24,6 +28,7 @@ public class Produto {
 	@NotNull
 	private Double quantidade;
 	
+	@NotNull
 	private Double peso;
 	
 	@NotNull
@@ -31,10 +36,8 @@ public class Produto {
 	private String tipo_prod;
 	
 	@NotNull
-	private enum compra_venda{
-		vendedor,
-		comprador
-	};
+	@Enumerated(EnumType.STRING)
+	private compra_venda Produto;
 	
 	@ManyToOne
 	private Categoria Categoria;
