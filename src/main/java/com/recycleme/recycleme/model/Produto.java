@@ -1,6 +1,7 @@
 package com.recycleme.recycleme.model;
 
 import javax.persistence.Entity;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,7 +14,6 @@ import javax.validation.constraints.Size;
 @Table
 public class Produto {
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -23,7 +23,6 @@ public class Produto {
 	
 	@NotNull
 	private Double quantidade;
-	
 	
 	private Double peso;
 	
@@ -90,6 +89,4 @@ public class Produto {
 	public void setCategoria(Categoria categoria) {
 		Categoria = categoria;
 	}
-	
 }
-

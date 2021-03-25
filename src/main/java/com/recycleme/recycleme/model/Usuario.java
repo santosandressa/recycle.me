@@ -2,7 +2,6 @@ package com.recycleme.recycleme.model;
 
 import java.util.List;
 
-
 import javax.persistence.CascadeType;
 
 import javax.persistence.Entity;
@@ -16,48 +15,52 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 
-@Entity 
-@Table(name= "usuario")
+@Entity
+@Table(name = "usuario")
 public class Usuario {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotNull
-	@Size(min= 5, max= 100)
+	@Size(min = 6, max = 60)
+	private String username;
+
+	@NotNull
+	@Size(min = 5, max = 100)
 	private String nome;
-	
-	@Size(min= 5, max= 45)
+
+	@Size(min = 5, max = 45)
 	private String cnpj;
-	
+
 	@NotNull
-	@Size(min= 5, max= 45)
+	@Size(min = 5, max = 45)
 	private String email;
-	
+
 	@NotNull
-	@Size(min= 5, max= 13)
+	@Size(min = 5, max = 13)
 	private String telefone;
-	
+
 	@NotNull
-	@Size(min= 6, max= 12)
+	@Size(min = 6, max = 12)
 	private String senha;
-	
+
 	@NotNull
-	@Size(max= 10)
+	@Size(max = 10)
 	private String cep;
-	
+
 	@NotNull
-	@Size( max= 45)
+	@Size(max = 45)
 	private String bairro;
-	
+
 	@NotNull
-	@Size(max= 45)
+	@Size(max = 45)
 	private String rua;
-	
+
 	@NotNull
 	private String numero;
-	
+
 	@OneToMany(mappedBy= "usuario", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("usuario")
 	private List<Produto> produto;
@@ -141,5 +144,20 @@ public class Usuario {
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
-	
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public List<Produto> getProduto() {
+		return produto;
+	}
+
+	public void setProduto(List<Produto> produto) {
+		this.produto = produto;
+	}
 }
