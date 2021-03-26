@@ -42,7 +42,6 @@ public class Categoria {
 	 * METAL,PLASTICO, VIDRO, PAPEL, MADEIRA
 	 */
 	
-	@NotNull
 	@Enumerated(EnumType.STRING)
 	private CategoriaTipo tipo;
 	
