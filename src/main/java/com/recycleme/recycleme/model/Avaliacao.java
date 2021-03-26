@@ -35,7 +35,7 @@ public class Avaliacao {
 	private Date data = new java.sql.Date(System.currentTimeMillis());
 
 	@ManyToOne
-	@JsonIgnoreProperties("usuario")
+	@JsonIgnoreProperties({"usuario", "avaliacao"})
 	private Usuario usuario;
 	
 	public Long getId() {
