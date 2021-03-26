@@ -41,11 +41,11 @@ public class Produto {
 	private CompraVenda compraVenda;
 	
 	@ManyToOne
-	@JsonIgnoreProperties("categoria")
+	@JsonIgnoreProperties({"categoria", "produto"})
 	private Categoria categoria;
 	
 	@ManyToOne
-	@JsonIgnoreProperties("usuario")
+	@JsonIgnoreProperties({"usuario", "produto"})
 	private Usuario usuario;
 
 	public long getId() {
