@@ -1,6 +1,6 @@
 package com.recycleme.recycleme.util;
 
-public enum CategoriaTipo {
+public enum Categoria {
 
 	
 	METAL,PLASTICO, VIDRO, PAPEL, MADEIRA
