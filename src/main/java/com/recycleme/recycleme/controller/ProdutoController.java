@@ -15,9 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.recycleme.recycleme.model.Categoria;
+
 import com.recycleme.recycleme.model.Produto;
 import com.recycleme.recycleme.repository.ProdutoRepository;
+import com.recycleme.recycleme.util.Categoria;
 import com.recycleme.recycleme.util.CompraVenda;
 
 @RestController

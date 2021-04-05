@@ -5,9 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.recycleme.recycleme.model.Categoria;
+
 import com.recycleme.recycleme.model.Produto;
 import com.recycleme.recycleme.repository.ProdutoRepository;
+import com.recycleme.recycleme.util.Categoria;
 
 @Service
 public class ProdutoService {
