@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.recycleme.recycleme.model.Produto;
 import com.recycleme.recycleme.repository.ProdutoRepository;
+import com.recycleme.recycleme.util.Categoria;
 import com.recycleme.recycleme.util.CompraVenda;
 
 @RestController
@@ -40,6 +42,16 @@ public class ProdutoController {
 	@GetMapping("/compravenda/{compraVenda}")
 	public ResponseEntity<List<Produto>> GetByCompraVenda(@PathVariable CompraVenda compraVenda){
 		return ResponseEntity.ok(repository.findAllByCompraVenda(compraVenda));
+	}
+	
+	@GetMapping("/nome/{nome}")
+	public ResponseEntity <List<Produto>> GetByNome(@PathVariable String nome){
+		return ResponseEntity.ok(repository.findByNomeContaining(nome));
+	}
+	
+	@GetMapping("/produtoCategoria/{categoria}")
+	public ResponseEntity <List<Produto>> GetByCategoira(@PathVariable Categoria categoria){
+		return ResponseEntity.ok(repository.findByCategoria(categoria));
 	}
 	
 	@PostMapping

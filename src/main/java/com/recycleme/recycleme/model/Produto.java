@@ -17,13 +17,16 @@ import com.recycleme.recycleme.util.Categoria;
 import com.recycleme.recycleme.util.CompraVenda;
 
 @Entity
-@Table(name = "produto")
+@Table(name = "tb_produtos")
 public class Produto {
 
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	
+	@NotNull
+	private String nome;
 	
 	@NotNull
 	private Double preco;
@@ -56,6 +59,15 @@ public class Produto {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+	
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public Double getPreco() {
