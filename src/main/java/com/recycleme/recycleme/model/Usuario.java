@@ -3,20 +3,25 @@ package com.recycleme.recycleme.model;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.recycleme.recycleme.util.ConfirmarSenha;
 import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "usuario")
+@ConfirmarSenha
 public class Usuario {
 
 	@Id
@@ -24,6 +29,7 @@ public class Usuario {
 	private Long id;
 
 	@NotNull
+	@Column(unique = true)
 	@Size(min = 6, max = 60)
 	private String username;
 
@@ -31,11 +37,16 @@ public class Usuario {
 	@Size(min = 5, max = 100)
 	private String nome;
 
-	@Size(min = 5, max = 45)
+	@Size(min = 5, max = 255)
+	@Column(unique = true)
+	@Pattern(regexp = "/^\\d{2}\\.\\d{3}\\.\\d{3}\\/\\d{4}\\-\\d{2}$/ ")
 	private String cnpj;
 
 	@NotNull
+	@NotEmpty
+	@Column(unique = true)
 	@Size(min = 5, max = 45)
+	@Valid
 	private String email;
 
 	@NotNull
@@ -43,9 +54,11 @@ public class Usuario {
 	private String telefone;
 
 	@NotNull
+	@NotEmpty
 	@Size(min = 6, max = 12)
 	private String senha;
-
+	private String confirmarSenha;
+	
 	@NotNull
 	@Size(max = 10)
 	private String cep;
@@ -69,7 +82,6 @@ public class Usuario {
 	@JsonIgnoreProperties("usuario")
 	private List<Avaliacao> avaliacao;
 	
-
 	public Long getId() {
 		return id;
 	}
@@ -173,6 +185,12 @@ public class Usuario {
 	public void setAvaliacao(List<Avaliacao> avaliacao) {
 		this.avaliacao = avaliacao;
 	}
-	
-	
+
+	public String getConfirmarSenha() {
+		return confirmarSenha;
+	}
+
+	public void setConfirmarSenha(String confirmarSenha) {
+		this.confirmarSenha = confirmarSenha;
+	}
 }
