@@ -1,4 +1,4 @@
-package com.recycleme.recycleme.util;
+package com.recycleme.recycleme.security;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
