@@ -29,7 +29,7 @@ public class Usuario {
 	@NotNull
 	@Column(unique = true)
 	@Size(min = 6, max = 60)
-	private String username;
+	private String usuario;
 
 	@NotNull
 	@Size(min = 5, max = 100)
@@ -160,12 +160,12 @@ public class Usuario {
 		this.numero = numero;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getUsuario() {
+		return usuario;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
 	public List<Produto> getProduto() {

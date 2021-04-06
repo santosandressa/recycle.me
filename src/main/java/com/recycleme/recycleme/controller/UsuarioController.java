@@ -54,9 +54,9 @@ public class UsuarioController {
 		return ResponseEntity.ok(repository.findAllByCnpjContainingIgnoreCase(cnpj));
 	}
 
-	@GetMapping("/username/{username}")
-	public ResponseEntity<List<Usuario>> getByUsername(@PathVariable String username) {
-		return ResponseEntity.ok(repository.findAllByUsernameContainingIgnoreCase(username));
+	@GetMapping("/usuario/{usuario}")
+	public ResponseEntity<List<Usuario>> getByUsername(@PathVariable String usuario) {
+		return ResponseEntity.ok(repository.findAllByUsernameContainingIgnoreCase(usuario));
 	}
 
 	@PostMapping
