@@ -19,7 +19,6 @@ import com.recycleme.recycleme.util.CompraVenda;
 @Entity
 @Table(name = "tb_produtos")
 public class Produto {
-
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
