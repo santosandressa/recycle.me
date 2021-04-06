@@ -1,4 +1,4 @@
-package com.recycleme.recycleme.util;
+package com.recycleme.recycleme.security;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

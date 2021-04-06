@@ -1,4 +1,4 @@
-package com.recycleme.recycleme.util;
+package com.recycleme.recycleme.security;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -9,12 +9,14 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
+
 @Documented
 @Target({ElementType.TYPE, ElementType.FIELD, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = ConfirmarSenhaValidador.class)
-public @interface ConfirmarSenha {
-	String message() default "Senha diferente";
+@Constraint(validatedBy = EmailValidator.class)
+public @interface EmailValido {
+	String message() default "Email inválido";
     Class<?>[] groups() default {}; 
     Class<? extends Payload>[] payload() default {};
 }

@@ -16,16 +16,10 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.recycleme.recycleme.util.ConfirmarSenha;
 import com.sun.istack.NotNull;
 
 @Entity
-<<<<<<< HEAD
-@Table(name = "usuario")
-@ConfirmarSenha
-=======
 @Table(name = "tb_usuarios")
->>>>>>> 737910a5a22511b8b6fefce43e1c570d4545f8d0
 public class Usuario {
 
 	@Id
