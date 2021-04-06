@@ -2,9 +2,11 @@ package com.recycleme.recycleme.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -56,7 +58,7 @@ public class UsuarioController {
 	public ResponseEntity<List<Usuario>> getByUsername(@PathVariable String username) {
 		return ResponseEntity.ok(repository.findAllByUsernameContainingIgnoreCase(username));
 	}
-	
+
 	@PostMapping
 	public ResponseEntity<Usuario> PostUsuario(@RequestBody Usuario usuario) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(usuario));
