@@ -20,12 +20,12 @@ import com.recycleme.recycleme.util.ConfirmarSenha;
 import com.sun.istack.NotNull;
 
 @Entity
-<<<<<<< HEAD
-@Table(name = "usuario")
-@ConfirmarSenha
-=======
+
 @Table(name = "tb_usuarios")
->>>>>>> 737910a5a22511b8b6fefce43e1c570d4545f8d0
+@ConfirmarSenha
+
+
+
 public class Usuario {
 
 	@Id
