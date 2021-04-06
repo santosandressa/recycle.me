@@ -2,6 +2,7 @@ package com.recycleme.recycleme.model;
 
 import javax.persistence.Entity;
 
+
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -46,6 +47,9 @@ public class Produto {
 	
 	@NotNull
 	@Enumerated(EnumType.STRING)
+	@ManyToOne
+	@JsonIgnoreProperties({"categoria", "produto"})
+
 	private Categoria categoria;
 	
 	@ManyToOne
