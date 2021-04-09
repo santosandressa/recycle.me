@@ -1,43 +1,36 @@
 package com.recycleme.recycleme.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.recycleme.recycleme.model.Produto;
+import com.recycleme.recycleme.model.Avaliacao;
+import com.recycleme.recycleme.model.Usuario;
 import com.recycleme.recycleme.repository.AvaliacaoRepository;
 import com.recycleme.recycleme.repository.ProdutoRepository;
 import com.recycleme.recycleme.repository.UsuarioRepository;
 
 @Service
-public class UsuarioService{
-	
+public class UsuarioService {
+
 	@Autowired
-	private UsuarioRepository reporitoryUsuario;
-	
+	private UsuarioRepository repositoryUsuario;
+
 	@Autowired
 	private ProdutoRepository repositoryProduto;
-	
+
 	@Autowired
-	private AvaliacaoRepository avalicaoRepository;
-	
-	
-	
-	//cadastrar usuario
-	//logar
+	private AvaliacaoRepository repositoryAvaliacao;
 
-	//cadastrar produto
+	public Avaliacao postarAvaliacao(Avaliacao avaliacao, Long idUsuario) {
+		Avaliacao novaAvaliacao = repositoryAvaliacao.save(avaliacao);
+		Optional<Usuario> usuarioExistente = repositoryUsuario.findById(idUsuario);
 
-	public Produto cadastrarProduto(Produto novoProduto, Long idUsuario) {
-		Produto produtoExistente = repositoryProduto.save(novoProduto);
+		if (usuarioExistente.isPresent()) {
+			novaAvaliacao.setUsuario(usuarioExistente.get());
+			return repositoryAvaliacao.save(avaliacao);
+		}
+		return null;
 	}
-	
-	//comprar
-
-	//cadastrar avalicao
-
-	//editar avaliacao
-
-	//pegar usuario (vendendor e comprador)
-	//delete produto
-	
 }
