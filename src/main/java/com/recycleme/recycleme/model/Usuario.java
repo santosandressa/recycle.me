@@ -20,13 +20,6 @@ import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "tb_usuarios")
-
-
-
-
-
-
-
 public class Usuario {
 
 	@Id
