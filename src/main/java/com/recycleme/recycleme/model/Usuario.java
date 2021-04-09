@@ -55,7 +55,7 @@ public class Usuario {
 	@NotEmpty
 	@Size(min = 6)
 	private String senha;
-	
+
 	@NotNull
 	@Size(max = 10)
 	private String cep;
@@ -78,7 +78,7 @@ public class Usuario {
 	@OneToMany(mappedBy= "usuario", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("usuario")
 	private List<Avaliacao> avaliacao;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -182,6 +182,4 @@ public class Usuario {
 	public void setAvaliacao(List<Avaliacao> avaliacao) {
 		this.avaliacao = avaliacao;
 	}
-
-
 }
