@@ -1,7 +1,9 @@
 package com.recycleme.recycleme.controller;
 
 import java.util.List;
+import java.util.Optional;
 
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 
 import com.recycleme.recycleme.model.Usuario;
+import com.recycleme.recycleme.model.UsuarioLogin;
 import com.recycleme.recycleme.repository.UsuarioRepository;
+import com.recycleme.recycleme.service.UsuarioService;
 
 @RestController
 @RequestMapping("/api/v1/recycleMe/usuario")
@@ -31,6 +35,9 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioRepository repository;
+	
+	@Autowired
+	private UsuarioService usuarioService;
 	
 	@GetMapping("/usuario/cadastro")
 	public String mostrarCadastro(WebRequest request, Model model) {
@@ -57,6 +64,19 @@ public class UsuarioController {
 	@GetMapping("/usuario/{usuario}")
 	public ResponseEntity<List<Usuario>> getByUsername(@PathVariable String usuario) {
 		return ResponseEntity.ok(repository.findAllByUsuarioContainingIgnoreCase(usuario));
+	}
+	
+	@PostMapping("/cadastrar")
+	public ResponseEntity<Usuario> cadastro(@Valid @RequestBody Usuario novoUsuario){
+		return new ResponseEntity<Usuario>(usuarioService.cadastrarUsuario(novoUsuario), HttpStatus.CREATED);
+	}
+
+
+	@PostMapping("/logar")
+	public ResponseEntity<UsuarioLogin> auth(@RequestBody Optional<UsuarioLogin> usuarioLogin){
+		return usuarioService.logar(usuarioLogin)
+				.map(usuario -> ResponseEntity.ok(usuario))
+				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
 	}
 
 	@PostMapping

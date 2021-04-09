@@ -1,4 +1,4 @@
-package com.recycleme.recycleme.util.security;
+package com.recycleme.recycleme.security;
 
 import java.util.Collection;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.recycleme.recycleme.util.security;
+package com.recycleme.recycleme.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
