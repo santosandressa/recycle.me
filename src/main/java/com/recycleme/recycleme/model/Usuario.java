@@ -55,8 +55,7 @@ public class Usuario {
 	@NotEmpty
 	@Size(min = 6)
 	private String senha;
-	private String confirmarSenha;
-	
+
 	@NotNull
 	@Size(max = 10)
 	private String cep;
@@ -182,13 +181,5 @@ public class Usuario {
 
 	public void setAvaliacao(List<Avaliacao> avaliacao) {
 		this.avaliacao = avaliacao;
-	}
-
-	public String getConfirmarSenha() {
-		return confirmarSenha;
-	}
-
-	public void setConfirmarSenha(String confirmarSenha) {
-		this.confirmarSenha = confirmarSenha;
 	}
 }
