@@ -1,7 +1,6 @@
 package com.recycleme.recycleme.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.recycleme.recycleme.model.Avaliacao;
 import com.recycleme.recycleme.repository.AvaliacaoRepository;
 
@@ -41,6 +39,11 @@ public class AvaliacaoController {
 	@GetMapping("/avaliacao/{avaliacao}")
 	public ResponseEntity<List<Avaliacao>> GetByAvaliacao(@PathVariable Long avaliacao){
 		return ResponseEntity.ok(repository.findAllByAvaliacao(avaliacao));
+	}
+	
+	@GetMapping("/cassificacao")
+	public ResponseEntity<List<Avaliacao>> GetByClassificacao(){
+		return ResponseEntity.ok(repository.findAllBylCassificacao());
 	}
 	
 	@PostMapping

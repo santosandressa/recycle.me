@@ -10,7 +10,7 @@ import com.recycleme.recycleme.model.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>
 {
-	public List<Usuario >findAllByUsernameContainingIgnoreCase(String usuario);
-	public List <Usuario> findAllByCnpjContainingIgnoreCase(String cnpj);
+	public List<Usuario>findAllByUsuarioContainingIgnoreCase(String usuario);
+	public List<Usuario>findAllByCnpjContainingIgnoreCase(String cnpj);
 	public Object findByEmail(String email);
 }
