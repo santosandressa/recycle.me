@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.request.WebRequest;
-
 import com.recycleme.recycleme.model.Usuario;
 import com.recycleme.recycleme.model.UsuarioLogin;
 import com.recycleme.recycleme.repository.UsuarioRepository;
@@ -86,5 +84,16 @@ public class UsuarioController {
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		repository.deleteById(id);
+	}
+	@DeleteMapping("/produto/delete/{id_Produto}/{id_Usuario}")
+	public ResponseEntity<?> removerProduto(
+			@PathVariable(value = "id_Produto")Long idProduto,
+			@PathVariable(value = "id_Usuario")Long idUsuario){
+		Usuario retorno = usuarioService.deletarProduto(idProduto, idUsuario);
+		if(retorno == null) {
+			return new ResponseEntity<String>("Produto ou Usuario Invalido",HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<Usuario>(retorno, HttpStatus.ACCEPTED);
+	
 	}
 }
