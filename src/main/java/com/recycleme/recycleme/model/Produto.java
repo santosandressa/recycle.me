@@ -47,9 +47,6 @@ public class Produto {
 	
 	@NotNull
 	@Enumerated(EnumType.STRING)
-	@ManyToOne
-	@JsonIgnoreProperties({"categoria", "produto"})
-
 	private Categoria categoria;
 	
 	@ManyToOne
