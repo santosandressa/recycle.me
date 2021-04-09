@@ -20,6 +20,13 @@ import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "tb_usuarios")
+
+
+
+
+
+
+
 public class Usuario {
 
 	@Id
@@ -53,7 +60,7 @@ public class Usuario {
 
 	@NotNull
 	@NotEmpty
-	@Size(min = 6, max = 12)
+	@Size(min = 6)
 	private String senha;
 	private String confirmarSenha;
 	
