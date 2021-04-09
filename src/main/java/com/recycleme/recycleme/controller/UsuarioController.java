@@ -71,7 +71,6 @@ public class UsuarioController {
 		return new ResponseEntity<Usuario>(usuarioService.cadastrarUsuario(novoUsuario), HttpStatus.CREATED);
 	}
 
-
 	@PostMapping("/logar")
 	public ResponseEntity<UsuarioLogin> auth(@RequestBody Optional<UsuarioLogin> usuarioLogin){
 		return usuarioService.logar(usuarioLogin)

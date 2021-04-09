@@ -3,6 +3,7 @@ package com.recycleme.recycleme.controller;
 import java.util.List;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +22,6 @@ import com.recycleme.recycleme.model.Produto;
 import com.recycleme.recycleme.repository.ProdutoRepository;
 
 import com.recycleme.recycleme.util.Categoria;
-
-import com.recycleme.recycleme.util.CompraVenda;
 
 @RestController
 @RequestMapping("api/v1/recycleMe/produto")
