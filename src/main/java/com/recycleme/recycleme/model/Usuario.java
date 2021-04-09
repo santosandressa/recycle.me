@@ -19,14 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 
 @Entity
-<<<<<<< HEAD
-
 @Table(name = "tb_usuarios")
-@ConfirmarSenha
-
-=======
-@Table(name = "tb_usuarios")
->>>>>>> 610b7fbe13b530358205924f5bd422ebbde9330d
 public class Usuario {
 
 	@Id
@@ -36,7 +29,7 @@ public class Usuario {
 	@NotNull
 	@Column(unique = true)
 	@Size(min = 6, max = 60)
-	private String username;
+	private String usuario;
 
 	@NotNull
 	@Size(min = 5, max = 100)
@@ -60,7 +53,7 @@ public class Usuario {
 
 	@NotNull
 	@NotEmpty
-	@Size(min = 6, max = 12)
+	@Size(min = 6)
 	private String senha;
 	private String confirmarSenha;
 	
@@ -167,12 +160,12 @@ public class Usuario {
 		this.numero = numero;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getUsuario() {
+		return usuario;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
 	public List<Produto> getProduto() {
