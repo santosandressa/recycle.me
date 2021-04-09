@@ -51,7 +51,7 @@ public class ProdutoController {
 	public ResponseEntity <List<Produto>> GetByCategoira(@PathVariable Categoria categoria){
 		return ResponseEntity.ok(repository.findByCategoria(categoria));
 	}
-	
+
 	@PostMapping
 	public ResponseEntity<Produto> post (@RequestBody Produto produto){
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(produto));
@@ -67,3 +67,4 @@ public class ProdutoController {
 		repository.deleteById(id);
 	}
 }
+

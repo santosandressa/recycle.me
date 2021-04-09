@@ -41,6 +41,7 @@ public class AvaliacaoController {
 		return ResponseEntity.ok(repository.findAllBylCassificacao());
 	}
 
+
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		repository.deleteById(id);
