@@ -1,6 +1,7 @@
 package com.recycleme.recycleme.model;
 
 import javax.persistence.Entity;
+
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -12,40 +13,38 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.recycleme.recycleme.util.CompraVenda;
+import com.recycleme.recycleme.util.Categoria;
 
 @Entity
-@Table(name = "produto")
+@Table(name = "tb_produtos")
 public class Produto {
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
+	@NotNull
+	private String nome;
+
 	@NotNull
 	private Double preco;
-	
+
 	@NotNull
 	private Double quantidade;
-	
+
 	@NotNull
 	private Double peso;
-	
+
 	@NotNull
 	@Size(min = 5, max = 255)
 	private String tipo_prod;
-	
+
 	@NotNull
 	@Enumerated(EnumType.STRING)
-	private CompraVenda compraVenda;
-	
-	@ManyToOne
-	@JsonIgnoreProperties({"categoria", "produto"})
 	private Categoria categoria;
-	
+
 	@ManyToOne
-	@JsonIgnoreProperties({"usuario", "produto"})
+	@JsonIgnoreProperties({ "usuario", "produto" })
 	private Usuario usuario;
 
 	public long getId() {
@@ -54,6 +53,14 @@ public class Produto {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public Double getPreco() {
@@ -96,14 +103,6 @@ public class Produto {
 		this.categoria = categoria;
 	}
 
-	public CompraVenda getCompraVenda() {
-		return compraVenda;
-	}
-
-	public void setCompraVenda(CompraVenda compraVenda) {
-		this.compraVenda = compraVenda;
-	}
-
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -111,5 +110,4 @@ public class Produto {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
 }

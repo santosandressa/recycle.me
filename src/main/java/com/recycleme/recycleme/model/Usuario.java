@@ -3,20 +3,26 @@ package com.recycleme.recycleme.model;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.recycleme.recycleme.util.CompraVenda;
 import com.sun.istack.NotNull;
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "tb_usuarios")
 public class Usuario {
 
 	@Id
@@ -24,18 +30,24 @@ public class Usuario {
 	private Long id;
 
 	@NotNull
+	@Column(unique = true)
 	@Size(min = 6, max = 60)
-	private String username;
+	private String usuario;
 
 	@NotNull
 	@Size(min = 5, max = 100)
 	private String nome;
 
-	@Size(min = 5, max = 45)
+	@Size(min = 5, max = 255)
+	@Column(unique = true)
+	@Pattern(regexp = "/^\\d{2}\\.\\d{3}\\.\\d{3}\\/\\d{4}\\-\\d{2}$/ ")
 	private String cnpj;
 
 	@NotNull
+	@NotEmpty
+	@Column(unique = true)
 	@Size(min = 5, max = 45)
+	@Valid
 	private String email;
 
 	@NotNull
@@ -43,7 +55,8 @@ public class Usuario {
 	private String telefone;
 
 	@NotNull
-	@Size(min = 6, max = 12)
+	@NotEmpty
+	@Size(min = 6)
 	private String senha;
 
 	@NotNull
@@ -68,7 +81,10 @@ public class Usuario {
 	@OneToMany(mappedBy= "usuario", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("usuario")
 	private List<Avaliacao> avaliacao;
-	
+
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	private CompraVenda compraVenda;
 
 	public Long getId() {
 		return id;
@@ -150,12 +166,12 @@ public class Usuario {
 		this.numero = numero;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getUsuario() {
+		return usuario;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
 	public List<Produto> getProduto() {
@@ -173,6 +189,4 @@ public class Usuario {
 	public void setAvaliacao(List<Avaliacao> avaliacao) {
 		this.avaliacao = avaliacao;
 	}
-	
-	
 }
