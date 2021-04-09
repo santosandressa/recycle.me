@@ -55,7 +55,7 @@ public class Usuario {
 	@NotEmpty
 	@Size(min = 6)
 	private String senha;
-
+	
 	@NotNull
 	@Size(max = 10)
 	private String cep;
