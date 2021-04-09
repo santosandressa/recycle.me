@@ -29,8 +29,11 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers("/api/v1/recycleMe/usuario/logar").permitAll().antMatchers("/api/v1/recycleMe/usuario/cadastrar").permitAll().anyRequest()
-				.authenticated().and().httpBasic().and().sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().cors().and().csrf().disable();
+		http.authorizeRequests().antMatchers("/api/v1/recycleMe/usuario/logar").permitAll()
+				.antMatchers("/api/v1/recycleMe/usuario/cadastrar").permitAll().anyRequest().authenticated().and()
+				.httpBasic().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+				.cors().and().csrf().disable();
+
 	}
+
 }

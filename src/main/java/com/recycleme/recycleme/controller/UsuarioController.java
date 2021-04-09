@@ -39,12 +39,6 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	@GetMapping("/usuario/cadastro")
-	public String mostrarCadastro(WebRequest request, Model model) {
-	    Usuario usuario = new Usuario();
-	    model.addAttribute("usuario", usuario);
-	    return "cadastro";
-	}
 
 	@GetMapping
 	public ResponseEntity<List<Usuario>> getAll() {
