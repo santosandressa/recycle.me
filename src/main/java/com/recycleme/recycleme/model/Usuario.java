@@ -16,12 +16,11 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.recycleme.recycleme.security.ConfirmarSenha;
 import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "tb_usuarios")
-@ConfirmarSenha
+
 
 
 
@@ -61,7 +60,7 @@ public class Usuario {
 
 	@NotNull
 	@NotEmpty
-	@Size(min = 6, max = 12)
+	@Size(min = 6)
 	private String senha;
 	private String confirmarSenha;
 	
