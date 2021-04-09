@@ -20,7 +20,6 @@ import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "tb_usuarios")
-
 public class Usuario {
 
 	@Id
@@ -56,7 +55,7 @@ public class Usuario {
 	@NotEmpty
 	@Size(min = 6)
 	private String senha;
-		
+
 	@NotNull
 	@Size(max = 10)
 	private String cep;
@@ -183,5 +182,4 @@ public class Usuario {
 	public void setAvaliacao(List<Avaliacao> avaliacao) {
 		this.avaliacao = avaliacao;
 	}
-
 }
