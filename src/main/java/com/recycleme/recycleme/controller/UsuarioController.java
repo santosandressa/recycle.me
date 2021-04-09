@@ -106,4 +106,15 @@ public class UsuarioController {
 	public void delete(@PathVariable Long id) {
 		repository.deleteById(id);
 	}
+	
+	@DeleteMapping("/produto/delete/{id_Produto}/{id_Usuario}")
+	public ResponseEntity<?> removerProduto(
+			@PathVariable(value = "id_Produto")Long idProduto,
+			@PathVariable(value = "id_Usuario")Long idUsuario){
+		Usuario retorno = usuarioService.deletarProduto(idProduto, idUsuario);
+		if(retorno == null) {
+			return new ResponseEntity<String>("Produto ou Usuario Invalido",HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<Usuario>(retorno, HttpStatus.ACCEPTED);
+	}
 }
