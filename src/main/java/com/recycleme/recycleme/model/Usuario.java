@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +18,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.recycleme.recycleme.util.CompraVenda;
 import com.sun.istack.NotNull;
 
 @Entity
@@ -55,7 +58,7 @@ public class Usuario {
 	@NotEmpty
 	@Size(min = 6)
 	private String senha;
-	
+
 	@NotNull
 	@Size(max = 10)
 	private String cep;
@@ -78,7 +81,11 @@ public class Usuario {
 	@OneToMany(mappedBy= "usuario", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("usuario")
 	private List<Avaliacao> avaliacao;
-	
+
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	private CompraVenda compraVenda;
+
 	public Long getId() {
 		return id;
 	}
@@ -182,6 +189,4 @@ public class Usuario {
 	public void setAvaliacao(List<Avaliacao> avaliacao) {
 		this.avaliacao = avaliacao;
 	}
-
-
 }
