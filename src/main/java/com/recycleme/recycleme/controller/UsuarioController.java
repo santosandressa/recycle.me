@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 
+import com.recycleme.recycleme.model.Produto;
 import com.recycleme.recycleme.model.Usuario;
 import com.recycleme.recycleme.model.UsuarioLogin;
 import com.recycleme.recycleme.repository.UsuarioRepository;
@@ -65,7 +66,6 @@ public class UsuarioController {
 		return new ResponseEntity<Usuario>(usuarioService.cadastrarUsuario(novoUsuario), HttpStatus.CREATED);
 	}
 
-
 	@PostMapping("/logar")
 	public ResponseEntity<UsuarioLogin> auth(@RequestBody Optional<UsuarioLogin> usuarioLogin){
 		return usuarioService.logar(usuarioLogin)
@@ -87,4 +87,17 @@ public class UsuarioController {
 	public void delete(@PathVariable Long id) {
 		repository.deleteById(id);
 	}
+
+	@PostMapping("/produto/novo/{id_usuario}")
+	public ResponseEntity<?> cadastrarProduto(
+			@PathVariable(value = "id_usuario") Long idUsuario,
+			@Valid @RequestBody Produto novoProduto){
+		Produto cadastro = usuarioService.cadastrarProduto(novoProduto, idUsuario);
+	
+		if(cadastro==null) {
+			return new ResponseEntity<String>("Falha no cadastro", HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<Produto>(cadastro, HttpStatus.CREATED);
+	}
 }
+	
