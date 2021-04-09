@@ -11,6 +11,6 @@ import com.recycleme.recycleme.model.Avaliacao;
 public interface AvaliacaoRepository extends JpaRepository<Avaliacao, Long> {
 	public List<Avaliacao>findAllByAvaliacao(Long avaliacao);
 	
-	@Query(value = "SELECT * FROM tb_avaliacoes WHERE avaliacao == 5", nativeQuery = true)
+	@Query(value = "SELECT * FROM tb_avaliacoes WHERE avaliacao = 5", nativeQuery = true)
 	public List<Avaliacao> findAllBylCassificacao();
 }

@@ -1,14 +1,18 @@
 package com.recycleme.recycleme.service;
 
+import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.codec.binary.Base64;
 import org.hibernate.validator.internal.util.privilegedactions.IsClassPresent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.recycleme.recycleme.model.Produto;
 import com.recycleme.recycleme.model.Usuario;
+import com.recycleme.recycleme.model.UsuarioLogin;
 import com.recycleme.recycleme.repository.AvaliacaoRepository;
 import com.recycleme.recycleme.repository.ProdutoRepository;
 import com.recycleme.recycleme.repository.UsuarioRepository;
@@ -27,7 +31,38 @@ public class UsuarioService{
 	private AvaliacaoRepository avalicaoRepository;
 	
 	//cadastrar usuario
+	public Usuario cadastrarUsuario (Usuario novoUsuario) {
+		Optional<Usuario> usuarioExistente = repositoryUsuario.findByUsuario(novoUsuario.getUsuario());
+		if(usuarioExistente.isPresent()) {
+			return null;
+		}
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String senhaCriptografada = encoder.encode(novoUsuario.getSenha());
+		novoUsuario.setSenha(senhaCriptografada);
+		return repositoryUsuario.save(novoUsuario);
+	}
 	//logar
+	public Optional<UsuarioLogin> logar(Optional<UsuarioLogin> usuarioLogin){
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		Optional<Usuario> usuarioPresente = repositoryUsuario.findByUsuario(usuarioLogin.get().getUsuario());
+
+		if(usuarioPresente.isPresent()) {
+			if(encoder.matches(usuarioLogin.get().getSenha(), usuarioPresente.get().getSenha())) {
+				String auth = usuarioLogin.get().getUsuario() + ":" + usuarioLogin.get().getSenha();
+				byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
+				String authHeader = "Basic " + new String(encodedAuth);
+				
+				usuarioLogin.get().setToken(authHeader);				
+				usuarioLogin.get().setNome(usuarioPresente.get().getNome());
+				usuarioLogin.get().setSenha(usuarioPresente.get().getSenha());
+				return usuarioLogin;
+			}
+		}
+		return null;
+	}
+	
+	
+	//cadastrar produto
 	public Produto cadastrarProduto(Produto novoProduto, Long idUsuario) {
 		Produto produtoExistente = repositoryProduto.save(novoProduto);
 		Optional<Usuario> usuarioExistente = repositoryUsuario.findById(idUsuario);
