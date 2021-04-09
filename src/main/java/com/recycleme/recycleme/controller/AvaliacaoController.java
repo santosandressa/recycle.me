@@ -45,12 +45,6 @@ public class AvaliacaoController {
 	public ResponseEntity<List<Avaliacao>> GetByClassificacao() {
 		return ResponseEntity.ok(repository.findAllBylCassificacao());
 	}
-
-	@PostMapping
-	public ResponseEntity<Avaliacao> post(@RequestBody Avaliacao avaliacao) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(avaliacao));
-	}
-
 	@PutMapping("/{avaliacaoId}")
 	public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody Avaliacao avaliacao) {
 
