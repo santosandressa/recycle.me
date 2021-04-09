@@ -20,10 +20,7 @@ import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "tb_usuarios")
-<<<<<<< HEAD
-@ConfirmarSenha
-=======
->>>>>>> 9d1ce37c7a84a24c5a8c6ca2b38aad8e2d71972d
+
 public class Usuario {
 
 	@Id
