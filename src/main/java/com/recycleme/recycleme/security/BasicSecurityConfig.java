@@ -33,7 +33,5 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/api/v1/recycleMe/usuario/cadastrar").permitAll().anyRequest().authenticated().and()
 				.httpBasic().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.cors().and().csrf().disable();
-
 	}
-
 }

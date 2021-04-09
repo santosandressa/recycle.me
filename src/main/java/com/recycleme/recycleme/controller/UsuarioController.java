@@ -1,6 +1,7 @@
 package com.recycleme.recycleme.controller;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -8,8 +9,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,10 +20,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.request.WebRequest;
 
+import com.recycleme.recycleme.model.Avaliacao;
 import com.recycleme.recycleme.model.Usuario;
 import com.recycleme.recycleme.model.UsuarioLogin;
+import com.recycleme.recycleme.repository.AvaliacaoRepository;
 import com.recycleme.recycleme.repository.UsuarioRepository;
 import com.recycleme.recycleme.service.UsuarioService;
 
@@ -35,10 +35,12 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioRepository repository;
-	
+
 	@Autowired
 	private UsuarioService usuarioService;
-	
+
+	@Autowired
+	private AvaliacaoRepository repositoryAvaliacao;;
 
 	@GetMapping
 	public ResponseEntity<List<Usuario>> getAll() {
@@ -59,16 +61,15 @@ public class UsuarioController {
 	public ResponseEntity<List<Usuario>> getByUsername(@PathVariable String usuario) {
 		return ResponseEntity.ok(repository.findAllByUsuarioContainingIgnoreCase(usuario));
 	}
-	
+
 	@PostMapping("/cadastrar")
-	public ResponseEntity<Usuario> cadastro(@Valid @RequestBody Usuario novoUsuario){
+	public ResponseEntity<Usuario> cadastro(@Valid @RequestBody Usuario novoUsuario) {
 		return new ResponseEntity<Usuario>(usuarioService.cadastrarUsuario(novoUsuario), HttpStatus.CREATED);
 	}
 
 	@PostMapping("/logar")
-	public ResponseEntity<UsuarioLogin> auth(@RequestBody Optional<UsuarioLogin> usuarioLogin){
-		return usuarioService.logar(usuarioLogin)
-				.map(usuario -> ResponseEntity.ok(usuario))
+	public ResponseEntity<UsuarioLogin> auth(@RequestBody Optional<UsuarioLogin> usuarioLogin) {
+		return usuarioService.logar(usuarioLogin).map(usuario -> ResponseEntity.ok(usuario))
 				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
 	}
 
@@ -80,6 +81,25 @@ public class UsuarioController {
 	@PutMapping
 	public ResponseEntity<Usuario> put(@RequestBody Usuario usuario) {
 		return ResponseEntity.status(HttpStatus.OK).body(repository.save(usuario));
+	}
+
+	// acoes do usuario
+
+	@PostMapping("/avaliacao/nova/{avaliacaoId}")
+	public ResponseEntity<Avaliacao> post(@PathVariable Long id, @RequestBody Avaliacao avaliacao) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(repositoryAvaliacao.save(avaliacao));
+	}
+
+	@PutMapping("/avaliacao/{avaliacaoId}")
+	public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody Avaliacao avaliacao) {
+
+		Optional<Avaliacao> avaliacaoAtual = repositoryAvaliacao.findById(id);
+
+		if (avaliacaoAtual != null) {
+			avaliacaoAtual = repositoryAvaliacao.save(avaliacaoAtual);
+			return ResponseEntity.ok(avaliacaoAtual);
+		}
+		return ResponseEntity.notFound().build();
 	}
 
 	@DeleteMapping("/{id}")
