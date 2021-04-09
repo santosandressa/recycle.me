@@ -28,6 +28,7 @@ public class Produto {
 	@NotNull
 	private String nome;
 	
+	
 	@NotNull
 	private Double preco;
 	
@@ -41,9 +42,6 @@ public class Produto {
 	@Size(min = 5, max = 255)
 	private String tipo_prod;
 	
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	private CompraVenda compraVenda;
 	
 	@NotNull
 	@Enumerated(EnumType.STRING)
@@ -53,6 +51,7 @@ public class Produto {
 	@JsonIgnoreProperties({"usuario", "produto"})
 	private Usuario usuario;
 
+	
 	public long getId() {
 		return id;
 	}
@@ -110,14 +109,6 @@ public class Produto {
 		this.categoria = categoria;
 	}
 
-	public CompraVenda getCompraVenda() {
-		return compraVenda;
-	}
-
-	public void setCompraVenda(CompraVenda compraVenda) {
-		this.compraVenda = compraVenda;
-	}
-
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -125,5 +116,8 @@ public class Produto {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+
+
+
 	
 }

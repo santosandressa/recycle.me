@@ -42,10 +42,6 @@ public class ProdutoController {
 					.map(resp -> ResponseEntity.ok(resp))
 					.orElse(ResponseEntity.notFound().build());
 	}
-	@GetMapping("/compravenda/{compraVenda}")
-	public ResponseEntity<List<Produto>> GetByCompraVenda(@PathVariable CompraVenda compraVenda){
-		return ResponseEntity.ok(repository.findAllByCompraVenda(compraVenda));
-	}
 	
 	@GetMapping("/nome/{nome}")
 	public ResponseEntity <List<Produto>> GetByNome(@PathVariable String nome){
