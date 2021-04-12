@@ -1,12 +1,15 @@
 package com.recycleme.recycleme.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -43,7 +46,8 @@ public class Produto {
 	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "usuario")
 	@JsonIgnoreProperties({ "usuario", "produto" })
 	private Usuario usuario;
 

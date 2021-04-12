@@ -60,7 +60,7 @@ public class UsuarioController {
 		return ResponseEntity.ok(repository.findAllByCnpjContainingIgnoreCase(cnpj));
 	}
 
-	@GetMapping("/usuario/{usuario}")
+	@GetMapping("/nomeUsuario/{usuario}")
 	public ResponseEntity<List<Usuario>> getByUsername(@PathVariable String usuario) {
 		return ResponseEntity.ok(repository.findAllByUsuarioContainingIgnoreCase(usuario));
 	}
@@ -88,9 +88,15 @@ public class UsuarioController {
 
 	// acoes do usuario
 
-	@PostMapping("/avaliacao/nova/{avaliacaoId}")
-	public ResponseEntity<Avaliacao> post(@PathVariable Long id, @RequestBody Avaliacao avaliacao) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(repositoryAvaliacao.save(avaliacao));
+	@PostMapping("/avaliacao/nova/{id_usuario}")
+	public ResponseEntity<?> postarAvaliacao(
+			@PathVariable(value = "id_usuario") Long idUsuario,
+			@Valid @RequestBody Avaliacao avaliacao) {
+		Avaliacao cadastro = usuarioService.postarAvaliacao(avaliacao, idUsuario);
+		if(cadastro==null) {
+			return new ResponseEntity<String>("Falha no cadastro da avaliacao", HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<Avaliacao>(cadastro, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/avaliacao/{avaliacaoId}")

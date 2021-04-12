@@ -1,5 +1,6 @@
 package com.recycleme.recycleme.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -76,13 +78,12 @@ public class Usuario {
 
 	@OneToMany(mappedBy= "usuario", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("usuario")
-	private List<Produto> produto;
+	private List<Produto> produto = new ArrayList<>();
 	
 	@OneToMany(mappedBy= "usuario", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("usuario")
 	private List<Avaliacao> avaliacao;
 
-	@NotNull
 	@Enumerated(EnumType.STRING)
 	private CompraVenda compraVenda;
 
@@ -189,4 +190,13 @@ public class Usuario {
 	public void setAvaliacao(List<Avaliacao> avaliacao) {
 		this.avaliacao = avaliacao;
 	}
+
+	public CompraVenda getCompraVenda() {
+		return compraVenda;
+	}
+
+	public void setCompraVenda(CompraVenda compraVenda) {
+		this.compraVenda = compraVenda;
+	}
+	
 }

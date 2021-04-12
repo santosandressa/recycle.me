@@ -16,7 +16,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>
 	public List<Usuario>findAllByUsuarioContainingIgnoreCase(String usuario);
 	public List<Usuario>findAllByCnpjContainingIgnoreCase(String cnpj);
 	public Object findByEmail(String email);
-	public Optional<Usuario> findById(Long id);
 	public Optional<Usuario> findByUsuario(String usuario);
 	public List<Usuario> findAllByCompraVenda(CompraVenda compraVenda);
 }

@@ -2,6 +2,7 @@ package com.recycleme.recycleme.service;
 
 import java.util.Optional;
 
+
 import java.nio.charset.Charset;
 import java.util.List;
 
@@ -53,6 +54,7 @@ public class UsuarioService {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String senhaCriptografada = encoder.encode(novoUsuario.getSenha());
 		novoUsuario.setSenha(senhaCriptografada);
+		
 		return repositoryUsuario.save(novoUsuario);
 	}
 
@@ -79,7 +81,7 @@ public class UsuarioService {
 		Produto produtoExistente = repositoryProduto.save(novoProduto);
 		Optional<Usuario> usuarioExistente = repositoryUsuario.findById(idUsuario);
 
-		if (usuarioExistente.isPresent()) {
+		if(usuarioExistente.isPresent()) {
 			produtoExistente.setUsuario(usuarioExistente.get());
 			return repositoryProduto.save(produtoExistente);
 		}
