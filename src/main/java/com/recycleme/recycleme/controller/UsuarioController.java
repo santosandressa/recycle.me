@@ -31,6 +31,8 @@ import com.recycleme.recycleme.repository.AvaliacaoRepository;
 import com.recycleme.recycleme.repository.UsuarioRepository;
 import com.recycleme.recycleme.service.UsuarioService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/api/v1/recycleMe/usuario")
 @CrossOrigin("*")
@@ -46,54 +48,74 @@ public class UsuarioController {
 	private AvaliacaoRepository repositoryAvaliacao;;
 
 	@GetMapping
+	@ApiOperation(value="Retorna uma lista com todos os usuários")
 	public ResponseEntity<List<Usuario>> getAll() {
 		return ResponseEntity.ok(repository.findAll());
 	}
 
 	@GetMapping("/{id}")
+	@ApiOperation(value="Retorna um usuário baseado no ID")
 	public ResponseEntity<Usuario> GetById(@PathVariable long id) {
 		return repository.findById(id).map(resp -> ResponseEntity.ok(resp)).orElse(ResponseEntity.notFound().build());
 	}
 
 	@GetMapping("/cnpj/{cnpj}")
+	@ApiOperation(value="Retorna uma lista de postagens")
 	public ResponseEntity<List<Usuario>> GetByCnpj(@PathVariable String cnpj) {
 		return ResponseEntity.ok(repository.findAllByCnpjContainingIgnoreCase(cnpj));
 	}
 
-	@GetMapping("/usuario/{usuario}")
+	@GetMapping("/nomeUsuario/{usuario}")
+	@ApiOperation(value="Retorna uma lista de usuarios baseado no username")
 	public ResponseEntity<List<Usuario>> getByUsername(@PathVariable String usuario) {
 		return ResponseEntity.ok(repository.findAllByUsuarioContainingIgnoreCase(usuario));
 	}
 
 	@PostMapping("/cadastrar")
+	@ApiOperation(value="Cadastra usuario")
 	public ResponseEntity<Usuario> cadastro(@Valid @RequestBody Usuario novoUsuario) {
+		Usuario cadastroUsuario = usuarioService.cadastrarUsuario(novoUsuario);
+		if (cadastroUsuario == null) {
+			return new ResponseEntity<Usuario>(HttpStatus.REQUEST_TIMEOUT);
+		}
 		return new ResponseEntity<Usuario>(usuarioService.cadastrarUsuario(novoUsuario), HttpStatus.CREATED);
 	}
 
 	@PostMapping("/logar")
+	@ApiOperation(value="Loga usuario")
 	public ResponseEntity<UsuarioLogin> auth(@RequestBody Optional<UsuarioLogin> usuarioLogin) {
 		return usuarioService.logar(usuarioLogin).map(usuario -> ResponseEntity.ok(usuario))
 				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
 	}
 
 	@PostMapping
+	@ApiOperation(value="Posta usuario")
 	public ResponseEntity<Usuario> PostUsuario(@RequestBody Usuario usuario) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(usuario));
 	}
 
 	@PutMapping
+	@ApiOperation(value="Edita usuario")
 	public ResponseEntity<Usuario> put(@RequestBody Usuario usuario) {
 		return ResponseEntity.status(HttpStatus.OK).body(repository.save(usuario));
 	}
 
 	// acoes do usuario
 
-	@PostMapping("/avaliacao/nova/{avaliacaoId}")
-	public ResponseEntity<Avaliacao> post(@PathVariable Long id, @RequestBody Avaliacao avaliacao) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(repositoryAvaliacao.save(avaliacao));
+	@PostMapping("/avaliacao/nova/{id_usuario}")
+	@ApiOperation(value="Posta avaliação")
+	public ResponseEntity<?> postarAvaliacao(
+			@PathVariable(value = "id_usuario") Long idUsuario,
+			@Valid @RequestBody Avaliacao avaliacao) {
+		Avaliacao cadastro = usuarioService.postarAvaliacao(avaliacao, idUsuario);
+		if(cadastro==null) {
+			return new ResponseEntity<String>("Falha no cadastro da avaliacao", HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<Avaliacao>(cadastro, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/avaliacao/{avaliacaoId}")
+	@ApiOperation(value="Edita avaliação")
 	public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody Avaliacao avaliacao) {
 
 		Optional<Avaliacao> avaliacaoAtual = repositoryAvaliacao.findById(id);
@@ -106,11 +128,13 @@ public class UsuarioController {
 	}
 
 	@DeleteMapping("/{id}")
+	@ApiOperation(value="Deleta usuario")
 	public void delete(@PathVariable Long id) {
 		repository.deleteById(id);
 	}
 
 	@PostMapping("/produto/novo/{id_usuario}")
+	@ApiOperation(value="Posta produto")
 	public ResponseEntity<?> cadastrarProduto(
 			@PathVariable(value = "id_usuario") Long idUsuario,
 			@Valid @RequestBody Produto novoProduto){
@@ -123,6 +147,7 @@ public class UsuarioController {
 	}
 
 	@DeleteMapping("/produto/delete/{id_Produto}/{id_Usuario}")
+	@ApiOperation(value="Deleta produto")
 	public ResponseEntity<?> removerProduto(
 			@PathVariable(value = "id_Produto")Long idProduto,
 			@PathVariable(value = "id_Usuario")Long idUsuario){

@@ -23,6 +23,8 @@ import com.recycleme.recycleme.repository.ProdutoRepository;
 
 import com.recycleme.recycleme.util.Categoria;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("api/v1/recycleMe/produto")
 @CrossOrigin("*")
@@ -31,11 +33,13 @@ public class ProdutoController {
 	@Autowired ProdutoRepository repository;
 	
 	@GetMapping
+	@ApiOperation(value="Retorna uma lista de produtos")
 	public ResponseEntity<List<Produto>> GetAll(){
 		return ResponseEntity.ok(repository.findAll());
 	}
 	
 	@GetMapping("/{id}")
+	@ApiOperation(value="Retorna um produto por ID")
 	public ResponseEntity<Produto> GetById(@PathVariable long id){
 			return repository.findById(id)
 					.map(resp -> ResponseEntity.ok(resp))
@@ -43,26 +47,31 @@ public class ProdutoController {
 	}
 	
 	@GetMapping("/nome/{nome}")
+	@ApiOperation(value="Retorna uma lista de produto que contenha o nome passado")
 	public ResponseEntity <List<Produto>> GetByNome(@PathVariable String nome){
 		return ResponseEntity.ok(repository.findByNomeContaining(nome));
 	}
 	
 	@GetMapping("/produtoCategoria/{categoria}")
+	@ApiOperation(value="Retorna uma lista de produtos baseado na categoria")
 	public ResponseEntity <List<Produto>> GetByCategoira(@PathVariable Categoria categoria){
 		return ResponseEntity.ok(repository.findByCategoria(categoria));
 	}
 
 	@PostMapping
+	@ApiOperation(value="Posta um produto")
 	public ResponseEntity<Produto> post (@RequestBody Produto produto){
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(produto));
 	}
 	
 	@PutMapping
+	@ApiOperation(value="Edita um produto")
 	public ResponseEntity<Produto> put (@RequestBody Produto produto){
 		return ResponseEntity.status(HttpStatus.OK).body(repository.save(produto));
 	}
 	
 	@DeleteMapping("/{id}")
+	@ApiOperation(value="Deleta um produto baseado no ID")
 	public void delete (@PathVariable long id) {
 		repository.deleteById(id);
 	}
