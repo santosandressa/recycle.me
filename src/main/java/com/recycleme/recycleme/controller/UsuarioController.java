@@ -74,6 +74,10 @@ public class UsuarioController {
 	@PostMapping("/cadastrar")
 	@ApiOperation(value="Cadastra usuario")
 	public ResponseEntity<Usuario> cadastro(@Valid @RequestBody Usuario novoUsuario) {
+		Usuario cadastroUsuario = usuarioService.cadastrarUsuario(novoUsuario);
+		if (cadastroUsuario == null) {
+			return new ResponseEntity<Usuario>(HttpStatus.REQUEST_TIMEOUT);
+		}
 		return new ResponseEntity<Usuario>(usuarioService.cadastrarUsuario(novoUsuario), HttpStatus.CREATED);
 	}
 

@@ -39,7 +39,7 @@ public class Avaliacao {
 	@JoinColumn(name = "usuario")
 	@JsonIgnoreProperties({"usuario", "avaliacao", "produto"})
 	private Usuario usuario;
-	
+
 	public Long getId() {
 		return id;
 	}

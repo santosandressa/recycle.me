@@ -2,6 +2,8 @@ package com.recycleme.recycleme.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.DelegatingWebMvcConfiguration;
+
 
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -12,9 +14,10 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+
 @EnableSwagger2
 @Configuration
-public class SwaggerConfig {
+public class SwaggerConfig{
 
 	@Bean
 	public Docket docket() {
@@ -31,7 +34,7 @@ public class SwaggerConfig {
 	private ApiInfo apiInfo(){
 		return new ApiInfoBuilder()
 		.title("Recycle.Me")
-		.description("API do Projeto Integrador Generation")
+		.description("API do Projeto de integrador Generation")
 		.version("1.0")
 		.contact(contact())
 		.build();
@@ -41,7 +44,5 @@ public class SwaggerConfig {
 		return new Contact("Andressa Santos, Caique Tuon, Daniela Arantes, Paula Candido e Yuri Dias",
 		"https://github.com/santosandressa/recycle.me",
 		"Projeto Integrador Generation Brasil");
-		}
-
-
+	}
 }

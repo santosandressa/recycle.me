@@ -2,6 +2,7 @@ package com.recycleme.recycleme.service;
 
 import java.util.Optional;
 
+import static org.hamcrest.CoreMatchers.nullValue;
 
 import java.nio.charset.Charset;
 import java.util.List;
@@ -21,7 +22,6 @@ import com.recycleme.recycleme.model.UsuarioLogin;
 import com.recycleme.recycleme.repository.AvaliacaoRepository;
 import com.recycleme.recycleme.repository.ProdutoRepository;
 import com.recycleme.recycleme.repository.UsuarioRepository;
-import com.recycleme.recycleme.util.CompraVenda;
 
 @Service
 public class UsuarioService {
@@ -57,7 +57,21 @@ public class UsuarioService {
 		
 		return repositoryUsuario.save(novoUsuario);
 	}
-
+/*	
+	public Usuario editarUsuario(Usuario usuarioEditado) {
+		Optional<Usuario> usuarioExistente = repositoryUsuario.findByUsuario(usuarioEditado.getUsuario());
+		if (usuarioExistente.isPresent()) {
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			String senhaCriptografada = encoder.encode(usuarioEditado.getSenha());
+			usuarioExistente.get().setSenha(senhaCriptografada);
+			usuarioExistente.
+			
+			return repositoryUsuario.save(usuarioEditado);
+		}
+		return null;
+	}
+	
+*/
 	public Optional<UsuarioLogin> logar(Optional<UsuarioLogin> usuarioLogin) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		Optional<Usuario> usuarioPresente = repositoryUsuario.findByUsuario(usuarioLogin.get().getUsuario());
@@ -87,11 +101,7 @@ public class UsuarioService {
 		}
 		return null;
 	}
-
-	public List<Usuario> pegarUsuarioVendedor(CompraVenda compraVenda) {
-		return repositoryUsuario.findAllByCompraVenda(compraVenda);
-	}
-
+	
 	public Usuario deletarProduto(Long idProduto, Long idUsuario) {
 		Optional<Produto> produtoExistente = repositoryProduto.findById(idProduto);
 		Optional<Usuario> usuarioExistente = repositoryUsuario.findById(idUsuario);
