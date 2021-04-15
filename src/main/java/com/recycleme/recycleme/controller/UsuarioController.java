@@ -96,12 +96,14 @@ public class UsuarioController {
 
 	@PutMapping
 	@ApiOperation(value="Edita usuario")
-	public ResponseEntity<Usuario> put(@RequestBody Usuario usuario) {
-		return ResponseEntity.status(HttpStatus.OK).body(repository.save(usuario));
+	public ResponseEntity<Usuario> editarUsuario(@RequestBody Usuario editadoUsuario) {
+		Usuario editaUsuario = usuarioService.editarUsuario(editadoUsuario);
+		if (editaUsuario == null) {
+			return new ResponseEntity<Usuario>(HttpStatus.REQUEST_TIMEOUT);
+		}
+		return new ResponseEntity<Usuario>(usuarioService.cadastrarUsuario(editadoUsuario), HttpStatus.ACCEPTED);
 	}
-
-	// acoes do usuario
-
+	
 	@PostMapping("/avaliacao/nova/{id_usuario}")
 	@ApiOperation(value="Posta avaliação")
 	public ResponseEntity<?> postarAvaliacao(

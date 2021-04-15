@@ -2,10 +2,11 @@ package com.recycleme.recycleme.service;
 
 import java.util.Optional;
 
-import static org.hamcrest.CoreMatchers.nullValue;
+
+
 
 import java.nio.charset.Charset;
-import java.util.List;
+
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -57,21 +58,20 @@ public class UsuarioService {
 		
 		return repositoryUsuario.save(novoUsuario);
 	}
-/*	
+	
 	public Usuario editarUsuario(Usuario usuarioEditado) {
-		Optional<Usuario> usuarioExistente = repositoryUsuario.findByUsuario(usuarioEditado.getUsuario());
+		Optional<Usuario> usuarioExistente = repositoryUsuario.findById(usuarioEditado.getId());
 		if (usuarioExistente.isPresent()) {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			String senhaCriptografada = encoder.encode(usuarioEditado.getSenha());
-			usuarioExistente.get().setSenha(senhaCriptografada);
-			usuarioExistente.
-			
+			usuarioEditado.setSenha(senhaCriptografada);
+
 			return repositoryUsuario.save(usuarioEditado);
 		}
 		return null;
 	}
 	
-*/
+
 	public Optional<UsuarioLogin> logar(Optional<UsuarioLogin> usuarioLogin) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		Optional<Usuario> usuarioPresente = repositoryUsuario.findByUsuario(usuarioLogin.get().getUsuario());
