@@ -2,8 +2,11 @@ package com.recycleme.recycleme.service;
 
 import java.util.Optional;
 
+
+
+
 import java.nio.charset.Charset;
-import java.util.List;
+
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -20,7 +23,6 @@ import com.recycleme.recycleme.model.UsuarioLogin;
 import com.recycleme.recycleme.repository.AvaliacaoRepository;
 import com.recycleme.recycleme.repository.ProdutoRepository;
 import com.recycleme.recycleme.repository.UsuarioRepository;
-import com.recycleme.recycleme.util.CompraVenda;
 
 @Service
 public class UsuarioService {
@@ -53,8 +55,22 @@ public class UsuarioService {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String senhaCriptografada = encoder.encode(novoUsuario.getSenha());
 		novoUsuario.setSenha(senhaCriptografada);
+		
 		return repositoryUsuario.save(novoUsuario);
 	}
+	
+	public Usuario editarUsuario(Usuario usuarioEditado) {
+		Optional<Usuario> usuarioExistente = repositoryUsuario.findById(usuarioEditado.getId());
+		if (usuarioExistente.isPresent()) {
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			String senhaCriptografada = encoder.encode(usuarioEditado.getSenha());
+			usuarioEditado.setSenha(senhaCriptografada);
+
+			return repositoryUsuario.save(usuarioEditado);
+		}
+		return null;
+	}
+	
 
 	public Optional<UsuarioLogin> logar(Optional<UsuarioLogin> usuarioLogin) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -79,17 +95,13 @@ public class UsuarioService {
 		Produto produtoExistente = repositoryProduto.save(novoProduto);
 		Optional<Usuario> usuarioExistente = repositoryUsuario.findById(idUsuario);
 
-		if (usuarioExistente.isPresent()) {
+		if(usuarioExistente.isPresent()) {
 			produtoExistente.setUsuario(usuarioExistente.get());
 			return repositoryProduto.save(produtoExistente);
 		}
 		return null;
 	}
-
-	public List<Usuario> pegarUsuarioVendedor(CompraVenda compraVenda) {
-		return repositoryUsuario.findAllByCompraVenda(compraVenda);
-	}
-
+	
 	public Usuario deletarProduto(Long idProduto, Long idUsuario) {
 		Optional<Produto> produtoExistente = repositoryProduto.findById(idProduto);
 		Optional<Usuario> usuarioExistente = repositoryUsuario.findById(idUsuario);

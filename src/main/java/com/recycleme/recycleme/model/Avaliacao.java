@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -35,9 +36,10 @@ public class Avaliacao {
 	private Date data = new java.sql.Date(System.currentTimeMillis());
 
 	@ManyToOne
-	@JsonIgnoreProperties({"usuario", "avaliacao"})
+	@JoinColumn(name = "usuario")
+	@JsonIgnoreProperties({"usuario", "avaliacao", "produto"})
 	private Usuario usuario;
-	
+
 	public Long getId() {
 		return id;
 	}
