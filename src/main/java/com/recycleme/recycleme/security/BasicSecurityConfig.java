@@ -2,6 +2,7 @@ package com.recycleme.recycleme.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -29,7 +30,10 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers("/api/v1/recycleMe/usuario/logar").permitAll()
+		http.authorizeRequests()
+				.antMatchers("/**").permitAll() 
+				.antMatchers("/api/v1/recycleMe/usuario/logar").permitAll()
+                .antMatchers(HttpMethod.GET ,"/produto").permitAll()
 				.antMatchers("/api/v1/recycleMe/usuario/cadastrar").permitAll().anyRequest().authenticated().and()
 				.httpBasic().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.cors().and().csrf().disable();
