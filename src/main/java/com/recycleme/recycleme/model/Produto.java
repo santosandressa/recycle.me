@@ -1,6 +1,7 @@
 package com.recycleme.recycleme.model;
 
 import javax.persistence.CascadeType;
+
 import javax.persistence.Entity;
 
 import javax.persistence.EnumType;
@@ -12,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -38,7 +38,7 @@ public class Produto {
 
 	@NotNull
 	private Double peso;
-
+	
 	@NotNull
 	@Size(min = 5, max = 255)
 	private String tipo_prod;
@@ -51,6 +51,8 @@ public class Produto {
 	@JoinColumn(name = "usuario")
 	@JsonIgnoreProperties({ "usuario", "produto" })
 	private Usuario usuario;
+	
+    private String foto;
 
 	public long getId() {
 		return id;
@@ -115,4 +117,13 @@ public class Produto {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
 }
