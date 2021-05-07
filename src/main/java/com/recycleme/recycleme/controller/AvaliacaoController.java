@@ -1,9 +1,9 @@
 package com.recycleme.recycleme.controller;
 
-import java.util.List;
+import java.util.List
+;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,7 +36,7 @@ public class AvaliacaoController {
 		return repository.findById(id).map(resp -> ResponseEntity.ok(resp)).orElse(ResponseEntity.notFound().build());
 	}
 
-	@GetMapping("/avaliacao/{avaliacao}")
+	@GetMapping("/{avaliacao}")
 	@ApiOperation(value="Retorna uma lista baseado em um número de 0 a 5")
 	public ResponseEntity<List<Avaliacao>> GetByAvaliacao(@PathVariable Long avaliacao) {
 		return ResponseEntity.ok(repository.findAllByAvaliacao(avaliacao));
