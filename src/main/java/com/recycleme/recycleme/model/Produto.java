@@ -39,8 +39,6 @@ public class Produto {
 	@NotNull
 	private Double peso;
 	
-	private String foto;
-	
 	@NotNull
 	@Size(min = 5, max = 255)
 	private String tipo_prod;
@@ -53,6 +51,8 @@ public class Produto {
 	@JoinColumn(name = "usuario")
 	@JsonIgnoreProperties({ "usuario", "produto" })
 	private Usuario usuario;
+	
+    private String foto;
 
 	public long getId() {
 		return id;
@@ -94,13 +94,6 @@ public class Produto {
 		this.peso = peso;
 	}
 
-	public String getFoto() {
-		return foto;
-	}
-
-	public void setFoto(String foto) {
-		this.foto = foto;
-	}
 	public String getTipo_prod() {
 		return tipo_prod;
 	}
@@ -124,4 +117,13 @@ public class Produto {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
 }
