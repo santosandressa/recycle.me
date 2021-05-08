@@ -31,4 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+<<<<<<< HEAD
 /target/
+=======
+/target/
+>>>>>>> 7c8945e89c347d6d59dcd564903cfe9bf89deb84
