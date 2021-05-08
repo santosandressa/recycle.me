@@ -1,16 +1,16 @@
 package com.recycleme.recycleme.model;
 
 public class UsuarioLogin {
-	private String id;
+	private Long id;
 	private String nome;
 	private String usuario;
 	private String senha;
 	private String token;
 	
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getNome() {
