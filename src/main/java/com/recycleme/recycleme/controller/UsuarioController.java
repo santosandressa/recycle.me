@@ -116,6 +116,15 @@ public class UsuarioController {
 		return new ResponseEntity<Avaliacao>(cadastro, HttpStatus.CREATED);
 	}
 
+	@PostMapping("/avaliacao")
+	@ApiOperation(value="Posta avaliação")
+	public ResponseEntity<Avaliacao> postAvaliacao(@Valid @RequestBody Avaliacao avaliacao) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(repositoryAvaliacao.save(avaliacao));
+	}
+
+	
+	
+	
 	@PutMapping("/avaliacao/{avaliacaoId}")
 	@ApiOperation(value="Edita avaliação")
 	public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody Avaliacao avaliacao) {
