@@ -49,7 +49,6 @@ public class Usuario {
 	@Valid
 	private String email;
 
-	@NotNull
 	@Column(unique = true)
 	@Size(min = 5, max = 13)
 	private String telefone;
