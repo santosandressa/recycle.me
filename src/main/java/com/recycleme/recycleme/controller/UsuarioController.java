@@ -104,24 +104,19 @@ public class UsuarioController {
 		return new ResponseEntity<Usuario>(usuarioService.cadastrarUsuario(editadoUsuario), HttpStatus.ACCEPTED);
 	}
 	
-	/*@PostMapping("/avaliacao/nova/")
+
+	@PostMapping("/avaliacao")
 	@ApiOperation(value="Posta avaliação")
-	public ResponseEntity<?> postarAvaliacao(
-			@PathVariable(value = "id_usuario") Long idUsuario,
-			@Valid @RequestBody Avaliacao avaliacao) {
-		Avaliacao cadastro = usuarioService.postarAvaliacao(avaliacao, idUsuario);
-		if(cadastro==null) {
-			return new ResponseEntity<String>("Falha no cadastro da avaliacao", HttpStatus.NO_CONTENT);
-		}
-		return new ResponseEntity<Avaliacao>(cadastro, HttpStatus.CREATED);
+	public ResponseEntity<Avaliacao> postAvaliacao(@Valid @RequestBody Avaliacao avaliacao) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(repositoryAvaliacao.save(avaliacao));
 	}
-	 */
-	
+
 	@PostMapping("/avaliacao/nova")
 	@ApiOperation(value="Posta avaliacao")
-	public ResponseEntity<?> PostAvaliacao(@RequestBody Avaliacao avaliacao) {
+	public ResponseEntity<Avaliacao> PostAvaliacao(@RequestBody Avaliacao avaliacao) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(repositoryAvaliacao.save(avaliacao));
 	}	
+
 	
 	@PutMapping("/avaliacao/{avaliacaoId}")
 	@ApiOperation(value="Edita avaliação")

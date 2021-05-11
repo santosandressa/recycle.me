@@ -81,6 +81,7 @@ public class Usuario {
 	@JsonIgnoreProperties("usuario")
 	private List<Avaliacao> avaliacao;
 
+	
 	public Long getId() {
 		return id;
 	}
