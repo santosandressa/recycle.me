@@ -21,12 +21,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table (name = "tb_avaliacoes")
 public class Avaliacao {
 	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@NotNull
-	private Long avaliacao;
+	private Long nota;
 	
 	@NotNull
 	@Size (min = 5, max = 400)
@@ -48,14 +49,15 @@ public class Avaliacao {
 		this.id = id;
 	}
 
-	public Long getAvaliacao() {
-		return avaliacao;
+	public Long getNota() {
+		return nota;
 	}
 
-	public void setAvaliacao(Long avaliacao) {
-		this.avaliacao = avaliacao;
+	public void setNota(Long nota) {
+		this.nota = nota;
 	}
 
+	
 	public String getComentario() {
 		return comentario;
 	}

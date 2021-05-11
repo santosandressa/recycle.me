@@ -10,7 +10,6 @@ import com.recycleme.recycleme.model.Avaliacao;
 
 @Repository
 public interface AvaliacaoRepository extends JpaRepository<Avaliacao, Long> {
-	public List<Avaliacao>findAllByAvaliacao(Long avaliacao);
 	public Optional<Avaliacao> save(Optional<Avaliacao> avaliacaoAtual);
 	
 	@Query(value = "SELECT * FROM tb_avaliacoes WHERE avaliacao >= 4", nativeQuery = true)

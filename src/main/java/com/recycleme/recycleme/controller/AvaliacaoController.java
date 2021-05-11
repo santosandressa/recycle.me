@@ -36,12 +36,6 @@ public class AvaliacaoController {
 		return repository.findById(id).map(resp -> ResponseEntity.ok(resp)).orElse(ResponseEntity.notFound().build());
 	}
 
-	@GetMapping("/{avaliacao}")
-	@ApiOperation(value="Retorna uma lista baseado em um número de 0 a 5")
-	public ResponseEntity<List<Avaliacao>> GetByAvaliacao(@PathVariable Long avaliacao) {
-		return ResponseEntity.ok(repository.findAllByAvaliacao(avaliacao));
-	}
-
 	@GetMapping("/classificacao")
 	@ApiOperation(value="Retorna uma lista de avaliações maiores que 4")
 	public ResponseEntity<List<Avaliacao>> GetByClassificacao() {
