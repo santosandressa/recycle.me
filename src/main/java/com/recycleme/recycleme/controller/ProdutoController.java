@@ -66,13 +66,13 @@ public class ProdutoController {
 	
 	@PutMapping
 	@ApiOperation(value="Edita um produto")
-	public ResponseEntity<Produto> put (@RequestBody Produto produto){
+	public ResponseEntity<Produto> put(@RequestBody Produto produto){
 		return ResponseEntity.status(HttpStatus.OK).body(repository.save(produto));
 	}
 	
 	@DeleteMapping("/{id}")
 	@ApiOperation(value="Deleta um produto baseado no ID")
-	public void delete (@PathVariable long id) {
+	public void delete(@PathVariable Long id) {
 		repository.deleteById(id);
 	}
 }

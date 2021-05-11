@@ -47,7 +47,7 @@ public class Produto {
 	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "usuario")
 	@JsonIgnoreProperties({ "usuario", "produto" })
 	private Usuario usuario;

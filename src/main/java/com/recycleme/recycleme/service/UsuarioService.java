@@ -102,7 +102,7 @@ public class UsuarioService {
 		}
 		return null;
 	}
-	
+
 	public Usuario deletarProduto(Long idProduto, Long idUsuario) {
 		Optional<Produto> produtoExistente = repositoryProduto.findById(idProduto);
 		Optional<Usuario> usuarioExistente = repositoryUsuario.findById(idUsuario);
@@ -115,4 +115,5 @@ public class UsuarioService {
 		}
 		return null;
 	}
+
 }
