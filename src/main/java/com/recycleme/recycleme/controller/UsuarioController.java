@@ -104,7 +104,7 @@ public class UsuarioController {
 		return new ResponseEntity<Usuario>(usuarioService.cadastrarUsuario(editadoUsuario), HttpStatus.ACCEPTED);
 	}
 	
-	@PostMapping("/avaliacao/nova/{id_usuario}")
+	/*@PostMapping("/avaliacao/nova/")
 	@ApiOperation(value="Posta avaliação")
 	public ResponseEntity<?> postarAvaliacao(
 			@PathVariable(value = "id_usuario") Long idUsuario,
@@ -115,6 +115,7 @@ public class UsuarioController {
 		}
 		return new ResponseEntity<Avaliacao>(cadastro, HttpStatus.CREATED);
 	}
+<<<<<<< HEAD
 
 	@PostMapping("/avaliacao")
 	@ApiOperation(value="Posta avaliação")
@@ -124,6 +125,15 @@ public class UsuarioController {
 
 	
 	
+=======
+	 */
+	
+	@PostMapping("/avaliacao/nova")
+	@ApiOperation(value="Posta avaliacao")
+	public ResponseEntity<?> PostAvaliacao(@RequestBody Avaliacao avaliacao) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(repositoryAvaliacao.save(avaliacao));
+	}	
+>>>>>>> 2009c991906e585ff169a483bf454cc4f1267c04
 	
 	@PutMapping("/avaliacao/{avaliacaoId}")
 	@ApiOperation(value="Edita avaliação")
