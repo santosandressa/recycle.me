@@ -28,6 +28,7 @@ import com.recycleme.recycleme.model.Produto;
 import com.recycleme.recycleme.model.Usuario;
 import com.recycleme.recycleme.model.UsuarioLogin;
 import com.recycleme.recycleme.repository.AvaliacaoRepository;
+import com.recycleme.recycleme.repository.ProdutoRepository;
 import com.recycleme.recycleme.repository.UsuarioRepository;
 import com.recycleme.recycleme.service.UsuarioService;
 
@@ -45,7 +46,10 @@ public class UsuarioController {
 	private UsuarioService usuarioService;
 
 	@Autowired
-	private AvaliacaoRepository repositoryAvaliacao;;
+	private AvaliacaoRepository repositoryAvaliacao;
+	
+	@Autowired
+	private ProdutoRepository repositoryProduto;
 
 	@GetMapping
 	@ApiOperation(value="Retorna uma lista com todos os usuários")
@@ -154,6 +158,12 @@ public class UsuarioController {
 		}
 		return new ResponseEntity<Produto>(cadastro, HttpStatus.CREATED);
 	}
+	
+	@PostMapping("/produto/novo")
+	@ApiOperation(value="Posta produto")
+	public ResponseEntity<Produto> PostProduto(@Valid @RequestBody Produto produto) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(repositoryProduto.save(produto));
+	}	
 
 	@DeleteMapping("/produto/delete/{id_Produto}/{id_Usuario}")
 	@ApiOperation(value="Deleta produto")
