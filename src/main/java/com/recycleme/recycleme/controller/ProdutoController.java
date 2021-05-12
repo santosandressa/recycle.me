@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +26,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("api/v1/recycleMe/produto")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProdutoController {
 	
 	@Autowired ProdutoRepository repository;
@@ -58,11 +57,6 @@ public class ProdutoController {
 		return ResponseEntity.ok(repository.findByCategoria(categoria));
 	}
 
-	@PostMapping
-	@ApiOperation(value="Posta um produto")
-	public ResponseEntity<Produto> post (@RequestBody Produto produto){
-		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(produto));
-	}
 	
 	@PutMapping
 	@ApiOperation(value="Edita um produto")
@@ -72,7 +66,7 @@ public class ProdutoController {
 	
 	@DeleteMapping("/{id}")
 	@ApiOperation(value="Deleta um produto baseado no ID")
-	public void delete(@PathVariable Long id) {
+	public void delete(@PathVariable long id) {
 		repository.deleteById(id);
 	}
 }

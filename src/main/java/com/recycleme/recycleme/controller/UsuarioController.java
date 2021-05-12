@@ -45,7 +45,8 @@ public class UsuarioController {
 	private UsuarioService usuarioService;
 
 	@Autowired
-	private AvaliacaoRepository repositoryAvaliacao;;
+	private AvaliacaoRepository repositoryAvaliacao;
+	
 
 	@GetMapping
 	@ApiOperation(value="Retorna uma lista com todos os usuários")
@@ -104,19 +105,11 @@ public class UsuarioController {
 		return new ResponseEntity<Usuario>(usuarioService.cadastrarUsuario(editadoUsuario), HttpStatus.ACCEPTED);
 	}
 	
-
-	@PostMapping("/avaliacao")
-	@ApiOperation(value="Posta avaliação")
-	public ResponseEntity<Avaliacao> postAvaliacao(@Valid @RequestBody Avaliacao avaliacao) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(repositoryAvaliacao.save(avaliacao));
-	}
-
 	@PostMapping("/avaliacao/nova")
 	@ApiOperation(value="Posta avaliacao")
-	public ResponseEntity<Avaliacao> PostAvaliacao(@RequestBody Avaliacao avaliacao) {
+	public ResponseEntity<?> PostAvaliacao(@RequestBody Avaliacao avaliacao) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(repositoryAvaliacao.save(avaliacao));
 	}	
-
 	
 	@PutMapping("/avaliacao/{avaliacaoId}")
 	@ApiOperation(value="Edita avaliação")
@@ -149,7 +142,7 @@ public class UsuarioController {
 		}
 		return new ResponseEntity<Produto>(cadastro, HttpStatus.CREATED);
 	}
-
+	
 	@DeleteMapping("/produto/delete/{id_Produto}/{id_Usuario}")
 	@ApiOperation(value="Deleta produto")
 	public ResponseEntity<?> removerProduto(
