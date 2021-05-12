@@ -58,11 +58,6 @@ public class ProdutoController {
 		return ResponseEntity.ok(repository.findByCategoria(categoria));
 	}
 
-	@PostMapping
-	@ApiOperation(value="Posta um produto")
-	public ResponseEntity<Produto> post(@RequestBody Produto produto){
-		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(produto));
-	}
 	
 	@PutMapping
 	@ApiOperation(value="Edita um produto")
