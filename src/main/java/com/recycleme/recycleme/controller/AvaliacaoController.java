@@ -42,7 +42,6 @@ public class AvaliacaoController {
 		return ResponseEntity.ok(repository.findAllBylCassificacao());
 	}
 
-
 	@DeleteMapping("/{id}")
 	@ApiOperation(value="Deleta uma avaliação por ID")
 	public void delete(@PathVariable Long id) {
